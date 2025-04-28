@@ -4,11 +4,11 @@ namespace SimilarProperties;
 if (!defined('ABSPATH')) exit;
 
 function render_similar_properties($atts = []) {
-    debug_log('Shortcode called', $atts, '🔁');
+    //debug_log('Shortcode called', $atts, '🔁');
 
     // Only check context and basic post validity here
     if (!is_singular('properties')) {
-        debug_log('Not on single properties page', null, '⚠️');
+        //debug_log('Not on single properties page', null, '⚠️');
         return '';
     }
     
@@ -16,7 +16,7 @@ function render_similar_properties($atts = []) {
     $post_id = isset($post) ? $post->ID : 0;
     
     if (!$post_id) {
-        debug_log('No valid post ID found', null, '⚠️');
+        //debug_log('No valid post ID found', null, '⚠️');
         return '';
     }
     
@@ -24,7 +24,7 @@ function render_similar_properties($atts = []) {
     $query = get_similar_properties($post_id, MAX_SIMILAR_PROPERTIES); // Always fetch up to 6
 
     if (!$query || !$query->have_posts()) {
-        debug_log('No similar properties found', null, '⚠️');
+        //debug_log('No similar properties found', null, '⚠️');
         return '';
     }
 
@@ -37,10 +37,12 @@ function render_similar_properties($atts = []) {
     
     // Randomize if needed
     if ($total_posts > $max_display) {
+        /*
         debug_log('Randomizing posts', [
             'total_found' => $total_posts,
             'will_show' => $max_display
         ], '🎲');
+        */
         
         shuffle($posts_to_show);
         $posts_to_show = array_slice($posts_to_show, 0, $max_display);

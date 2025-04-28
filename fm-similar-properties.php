@@ -12,16 +12,16 @@ namespace SimilarProperties;
 if (!defined('ABSPATH')) exit;
 
 // Load debug first so it's available everywhere
-require_once __DIR__ . '/includes/debug.php';
+// require_once __DIR__ . '/includes/debug.php';
 
 // Add constants
 const MAX_SIMILAR_PROPERTIES = 6;
 const DISPLAY_PROPERTIES = 3;
-const CACHE_DURATION = HOUR_IN_SECONDS;
+const CACHE_DURATION = DAY_IN_SECONDS;
 const PRICE_TOLERANCE = 30000;
 
 function init_plugin() {
-    debug_log('Plugin initialization started', null, '🚀');
+    //debug_log('Plugin initialization started', null, '🚀');
     
     require_once __DIR__ . '/includes/query.php';
     require_once __DIR__ . '/includes/cache.php';
@@ -29,7 +29,7 @@ function init_plugin() {
     require_once __DIR__ . '/includes/render.php';
     
     register_shortcodes();
-    debug_log('Plugin fully initialized', null, '✅');
+    //debug_log('Plugin fully initialized', null, '✅');
 }
 
 function check_dependencies() {
@@ -57,7 +57,7 @@ function check_dependencies() {
         $class = $checked ? 'updated' : 'error';
         $icon = $checked ? '✅' : '❌';
         echo sprintf(
-            '<div class="%s"><p>%s Similar Properties: Dependency check %s</p></div>',
+            '<div class="%s"><p>%s FM Similar Properties: Dependency check %s</p></div>',
             esc_attr($class),
             $icon,
             $checked ? 'passed' : 'failed'
@@ -68,16 +68,16 @@ function check_dependencies() {
 }
 
 function activate_plugin() {
-    debug_log('Plugin activation started', null, '🚀');
+    //debug_log('Plugin activation started', null, '🚀');
     
     if (!check_dependencies()) {
         // Add activation failure notice
         add_action('admin_notices', function() {
-            echo '<div class="error"><p>⛔ Similar Properties: Plugin activation aborted - dependencies not met</p></div>';
+            echo '<div class="error"><p>⛔ FM Similar Properties: Plugin activation aborted - dependencies not met</p></div>';
         });
         
         deactivate_plugins(plugin_basename(__FILE__));
-        wp_die('Similar Properties plugin activation failed: Required dependencies are missing.');
+        wp_die('FM Similar Properties plugin activation failed: Required dependencies are missing.');
     }
     
     // Set default options
@@ -91,7 +91,7 @@ function activate_plugin() {
         wp_mkdir_p($css_dir);
     }
     
-    debug_log('Plugin activated successfully', null, '✅');
+    //debug_log('Plugin activated successfully', null, '✅');
 }
 
 // Remove plugins_loaded hook and use activation hook instead

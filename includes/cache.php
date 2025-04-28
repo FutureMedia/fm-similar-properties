@@ -13,14 +13,14 @@ function get_cached_properties($post_id) {
     $cached = wp_cache_get($cache_key);
     
     if ($cached !== false) {
-        debug_log('Using object cache', ['post_id' => $post_id], '📦');
+        // debug_log('Using object cache', ['post_id' => $post_id], '📦');
         return $cached;
     }
     
     $transient = get_transient($cache_key);
     if (!empty($transient)) {
         wp_cache_set($cache_key, $transient);
-        debug_log('Using transient cache', ['post_id' => $post_id], '📦');
+        //debug_log('Using transient cache', ['post_id' => $post_id], '📦');
         return $transient;
     }
     
@@ -53,6 +53,6 @@ function clear_all_caches() {
         $count++;
     }
     
-    debug_log('Cleared all caches', ['count' => $count], '🧹');
+    // debug_log('Cleared all caches', ['count' => $count], '🧹');
     return $count;
 }
