@@ -2,7 +2,7 @@
 /**
  * Plugin Name: FM - Similar Properties
  * Description: Custom plugin for displaying similar properties based on type, price range, and location.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Future Media
  * Author URI: https://futuremedia.gr
  */
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) exit;
 const MAX_SIMILAR_PROPERTIES = 6;
 const DISPLAY_PROPERTIES = 3;
 const CACHE_DURATION = DAY_IN_SECONDS;
-const PRICE_TOLERANCE = 30000;
+const PRICE_TOLERANCE = 50000;
 
 function init_plugin() {
     //debug_log('Plugin initialization started', null, '🚀');
