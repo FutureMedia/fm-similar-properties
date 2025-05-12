@@ -66,9 +66,9 @@ function get_similar_properties($post_id, $limit = MAX_SIMILAR_PROPERTIES) {
     // Bail out if price invalid
     if (!$price || $price < 1) return false;
 
-    // Load tolerance from settings (default 30000)
-    $tolerance_raw = get_option('sp_price_tolerance', 3000);
-    $tolerance = is_numeric($tolerance_raw) && $tolerance_raw > 0 && $tolerance_raw < 1000000 ? intval($tolerance_raw) : 30000;
+    // Load tolerance from settings (default 50000)
+    $tolerance_raw = get_option('sp_price_tolerance', 50000);
+    $tolerance = is_numeric($tolerance_raw) && $tolerance_raw > 0 && $tolerance_raw < 1000000 ? intval($tolerance_raw) : 50000;
 
     // error_log("📏 Using tolerance: $tolerance");
 
@@ -120,7 +120,9 @@ function get_similar_properties($post_id, $limit = MAX_SIMILAR_PROPERTIES) {
     */
 
     global $wpdb;
-    error_log('📊 Sample prices in database:');
+
+
+    // error_log('📊 Sample prices in database:');
     $sample_prices = $wpdb->get_results("
         SELECT pm.post_id, pm.meta_value, p.post_title 
         FROM {$wpdb->postmeta} pm
@@ -130,9 +132,11 @@ function get_similar_properties($post_id, $limit = MAX_SIMILAR_PROPERTIES) {
         LIMIT 5
     ");
     
+    /*
     foreach ($sample_prices as $row) {
         error_log("Post {$row->post_id} ({$row->post_title}): Value in DB = '{$row->meta_value}'");
     }
+    */
 
     $query = new \WP_Query($args);
     /*
