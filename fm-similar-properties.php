@@ -122,6 +122,15 @@ add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_styles');
 add_action('admin_menu', __NAMESPACE__ . '\\register_admin_menu');
 add_action('save_post_properties', __NAMESPACE__ . '\\clear_property_cache');
 
+/*
+* Debugging: Check for large float values
+* This is a temporary measure to catch any unexpected float values
+* that might be causing issues in the plugin.
+* Note: This is a performance-intensive operation and should be used
+* with caution in production environments.
+* It is recommended to use this only during development or debugging sessions.
+* The debug_backtrace() function can be expensive, so use it wisely.
+
 add_filter('all', function($value = null) {
     if (is_float($value) && $value > 1e+17) {
         error_log("⚠️ Hook received a huge float: $value");
@@ -129,3 +138,4 @@ add_filter('all', function($value = null) {
     }
     return $value;
 }, 10, 1);
+*/
